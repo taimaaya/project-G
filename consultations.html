@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermAssist | Consult a Doctor (AI)</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #2c756f, #43939a);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .title {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .title img {
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .form-container h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .form-container p.intro {
+            font-size: 1.1em;
+            color: #6ae3cd;
+            margin-bottom: 15px;
+        }
+
+        .form-container p.privacy {
+            font-size: 0.9em;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        .form-container input:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(34, 193, 195, 0.8);
+        }
+
+        .form-container button {
+            background: #6ae3cd;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background: #57c4ac;
+        }
+
+        .ai-loading {
+            width: 100%;
+            height: 20px;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ai-loading .progress {
+            height: 100%;
+            background: #6ae3cd;
+            animation: loading 2s infinite;
+            width: 30%;
+            border-radius: 50px;
+        }
+
+        @keyframes loading {
+            0% { left: -30%; }
+            50% { left: 30%; }
+            100% { left: 100%; }
+        }
+
+        .analysis-details {
+            margin-top: 15px;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="title">
+    <span>Consult Doctor</span>
+    <img src="d.jpeg" alt="Consult Doctor">
+</div>
+
+<div class="form-container">
+    <h1>AI Skin Diagnosis</h1>
+    <p class="intro">Welcome! We wish you a speedy recovery. Please attach an image, and we will assist you as soon as possible.</p>
+    <p class="privacy">Note: Your uploaded image is treated with complete confidentiality.</p>
+    <form id="consult-form" action="upload_consultation.php" method="post" enctype="multipart/form-data">
+        <!-- Upload Image -->
+        <label for="image">Upload Skin Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required onchange="analyzeImage()">
+
+        <!-- Loading AI Analysis -->
+        <div class="ai-loading" id="ai-loading" style="display: none;">
+            <div class="progress"></div>
+        </div>
+
+        <!-- Analysis Result -->
+        <div id="analysis-result" class="analysis-details" style="display: none;">
+            <p id="disease-info"></p>
+            <p id="guidelines"></p>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function analyzeImage() {
+        const aiLoading = document.getElementById('ai-loading');
+        const analysisResult = document.getElementById('analysis-result');
+        const diseaseInfo = document.getElementById('disease-info');
+        const guidelines = document.getElementById('guidelines');
+
+        // Reset
+        analysisResult.style.display = 'none';
+        aiLoading.style.display = 'block';
+
+        // Simulate AI Analysis with Delay
+        setTimeout(() => {
+            aiLoading.style.display = 'none';
+
+            // Mock result (you can replace this with real data from AI analysis in the backend)
+            const disease = "Eczema";
+            const confidence = "87%";
+            const advice = "Keep the affected area moisturized, avoid scratching, and use prescribed topical treatments.";
+
+            // Populate results
+            diseaseInfo.innerHTML = `Image analyzed successfully. This appears to be <strong>${disease}</strong> with a confidence level of ${confidence}.`;
+            guidelines.innerHTML = `Health Advice: ${advice}`;
+
+            // Display results
+            analysisResult.style.display = 'block';
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>

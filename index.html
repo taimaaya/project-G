@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('ss.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            color: white;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        input {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+        button {
+            background-color: #008CBA;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4CAF50;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .toggle-link, .forgot-password {
+            color: rgb(249, 249, 249);
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .forgot-password {
+            font-size: 12px;
+            text-decoration: underline;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: rgb(249, 249, 249);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="login-form" class="form-container">
+            <h2>Login</h2>
+            <input type="email" id="login-email" placeholder="Email" required><br>
+            <input type="password" id="login-password" placeholder="Password" required minlength="8"><br>
+            <span class="forgot-password" onclick="forgotPassword()">Forgot Password?</span>
+            <span id="login-error-message" class="error"></span><br>
+            <button onclick="validateLogin()">Login</button><br>
+            <span class="toggle-link" onclick="showSignUpForm()">Don't have an account? Sign up</span>
+        </div>
+
+        <div id="signup-form" class="form-container" style="display: none;">
+            <h2>Sign Up</h2>
+            <input type="email" id="signup-email" placeholder="Email" required><br>
+            <input type="password" id="signup-password" placeholder="Password" required minlength="8"><br>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required minlength="8"><br>
+            <span id="signup-error-message" class="error"></span><br>
+            <button onclick="validateSignUp()">Sign Up</button><br>
+            <span class="toggle-link" onclick="showLoginForm()">Already have an account? Login</span>
+        </div>
+
+        <label for="language">Choose language:</label>
+        <select id="language" name="language">
+            <option value="ar">Arabic</option>
+            <option value="en">English</option>
+        </select>
+
+        <div class="footer">
+            manager@gmail.com | Contact Us
+        </div>
+    </div>
+
+    <script>
+        // Function to show login form
+        function showLoginForm() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('signup-form').style.display = 'none';
+        }
+
+        // Function to show signup form
+        function showSignUpForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
+
+        // Handle forgot password
+        function forgotPassword() {
+            alert('Redirecting to password recovery page.');
+            window.location.href = 'forgot-password.html';
+        }
+
+        // Validate login credentials
+        function validateLogin() {
+            var password = document.getElementById('login-password').value;
+            var errorMessage = document.getElementById('login-error-message');
+
+            if (password.length < 8) {
+                errorMessage.textContent = "Password must be at least 8 characters long.";
+            } else {
+                errorMessage.textContent = "";
+                window.location.href = 'welcome.html';
+            }
+        }
+
+        // Validate signup credentials
+        function validateSignUp() {
+            var password = document.getElementById('signup-password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+            var errorMessage = document.getElementById('signup-error-message');
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Passwords do not match.";
+            } else if (password.length < 8) {
+                errorMessage.textContent = "Password must be at least 8 characters long.";
+            } else {
+                errorMessage.textContent = "";
+                window.location.href = 'welcome.html';
+            }
+        }
+    </script>
+</body>
+</html>
+

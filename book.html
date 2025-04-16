@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | DermAssist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #43939a, #2c756f);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .booking-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 5px;
+            color: #f2f2f2;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #f2f2f2;
+            font-size: 1em;
+            color: #333;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #4caf50;
+            font-size: 1.2em;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #43a047;
+        }
+
+        .result-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="booking-container">
+    <h1>Book an Appointment</h1>
+    <form id="booking-form">
+        <div class="input-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
+        <div class="input-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+        </div>
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+            <label for="doctor">Select a Doctor</label>
+            <select id="doctor" required>
+                <option value="">-- Choose a Doctor --</option>
+                <option value="15">Dr. Aya Alkhadeer</option>
+                <option value="20">Dr. Ahmad Almsri</option>
+                <option value="10">Dr. Mohamad Amjd</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="date">Choose a Date</label>
+            <input type="date" id="date" required>
+        </div>
+        <button type="button" onclick="calculateWaitTime()">Book Now</button>
+    </form>
+    <div class="result-box" id="result-box" style="display: none;"></div>
+</div>
+
+<footer>
+    © 2024 DermAssist | Designed with AI
+</footer>
+
+<script>
+    function calculateWaitTime() {
+        // Collect user input
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const doctor = document.getElementById('doctor').value;
+        const date = document.getElementById('date').value;
+
+        // Validate form fields
+        if (!name || !phone || !email || !doctor || !date) {
+            alert('Please fill out all fields');
+            return;
+        }
+
+        // Simulate AI to calculate wait time
+        const baseWaitTime = parseInt(doctor); // Doctor's predefined base wait time in minutes
+        const randomFactor = Math.floor(Math.random() * 15); // Random additional wait time
+        const waitTime = baseWaitTime + randomFactor; // Calculate final wait time
+
+        // Display result
+        const resultBox = document.getElementById('result-box');
+        resultBox.style.display = 'block';
+        resultBox.textContent = `Hi ${name}, your appointment is confirmed with the doctor. Your estimated wait time for ${date} is approximately ${waitTime} minutes.`;
+    }
+</script>
+
+</body>
+</html>
